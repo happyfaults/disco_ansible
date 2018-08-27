@@ -1,6 +1,10 @@
 
 # Disco Deployment & Administration
 
+"Disco" is the name of the automated media ingestion system at [RXMusic (PCMusic)](http://www.rxmusic.com).
+
+Disco consists of a cluster of Ubuntu servers built ontop of the **Python-Erlang MapReduce** [Disco Project](http://discoproject.org/). The music streaming industry currently consists of a growing catalog of over 24 milltion unique titles. On average, Disco processed and ingested one new title every 4 seconds.
+
 Deploying new slave hosts to the **Disco cluster** and all cluster wide adminstration is accomplished using [Ansible](https://docs.ansible.com/) and a few custom scripts built on-top of [parallel-ssh](http://manpages.ubuntu.com/manpages/xenial/man1/parallel-ssh.1.html) and [parallel-rsync](http://manpages.ubuntu.com/manpages/bionic/man1/parallel-rsync.1.html).
 
 #### Host Terminology
