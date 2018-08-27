@@ -1,0 +1,15 @@
+---
+- include: pcmit/base.yml
+  tags:
+      - sync_user
+      - sync_user:pcmit
+      - sync_user:pcmit:base
+      
+- include: disco/base.yml
+  tags:
+     - sync_user
+     - sync_user:disco
+     - sync_user:disco:base
+
+
+     

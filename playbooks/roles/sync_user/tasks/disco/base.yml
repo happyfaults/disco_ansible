@@ -1,0 +1,131 @@
+---
+- name: Copy .ssh
+  synchronize:
+     src: /home/disco/.ssh
+     dest: /home/disco/
+     compress: yes
+     delete: yes
+
+- name: ln -s /home/disco disco
+  file:
+     src: /home/disco
+     dest: /home/disco/disco
+     remote_src: yes
+     state: link
+     force: no
+ 
+- name: Backup disco .bashrc
+  copy:
+     src: /home/disco/.bashrc
+     dest: /home/disco/.bashrc.bkp
+     remote_src: yes
+     force: no
+
+- name: Copy disco .bashrc
+  synchronize:
+     src: /home/disco/.bashrc
+     dest: /home/disco/
+     compress: yes
+
+- name: Copy disco .erlang.cookie
+  synchronize:
+     src: /home/disco/.erlang.cookie
+     dest: /home/disco/
+     compress: yes
+
+- name: Copy disco .ipython
+  synchronize:
+     src: /home/disco/.ipython
+     dest: /home/disco/
+     compress: yes
+     delete: yes
+
+- name: Copy .python-eggs
+  synchronize:
+     src: /home/disco/.python-eggs
+     dest: /home/disco/
+     compress: yes
+     delete: yes
+
+- name: Copy disco etc
+  synchronize:
+     src: /home/disco/etc
+     dest: /home/disco/
+     compress: yes
+
+- name: Copy disco share
+  synchronize:
+     src: /home/disco/share
+     dest: /home/disco/
+     compress: yes
+     delete: yes
+
+- name: Copy disco man
+  synchronize:
+     src: /home/disco/etc
+     dest: /home/disco/
+     compress: yes
+     delete: yes
+
+- name: Copy disco erlang
+  synchronize:
+     src: /home/disco/erlang
+     dest: /home/disco/
+     compress: yes
+     delete: yes
+
+- name: Copy disco pcmusic
+  synchronize:
+     src: /home/disco/pcmusic
+     dest: /home/disco/
+     compress: yes
+     delete: yes
+
+- name: Mkdir media
+  file:
+     path: /home/disco/media
+     state: directory
+     
+- name: Mkdir opt/var/disco
+  file:
+     path: /home/disco/opt/var/disco
+     state: directory
+
+- name: Copy disco opt/bin
+  synchronize:
+     src: /home/disco/opt/bin
+     dest: /home/disco/opt/
+     compress: yes
+
+- name: Copy disco opt/share
+  synchronize:
+     src: /home/disco/opt/lib
+     dest: /home/disco/opt/
+     compress: yes
+
+- name: Copy disco python
+  synchronize:
+     src: /home/disco/python
+     dest: /home/disco/
+     compress: yes
+     delete: yes
+
+- name: Copy disco medialib
+  synchronize:
+     src: /home/disco/medialib
+     dest: /home/disco/
+     compress: yes
+     delete: yes
+
+#- name: Copy disco jdk
+#  synchronize:
+#     src: /home/disco/jdk
+#     dest: /home/disco/
+#     compress: yes
+
+- name: Copy disco bin
+  synchronize:
+     src: /home/disco/bin
+     dest: /home/disco/
+     compress: yes
+     delete: yes

@@ -1,0 +1,27 @@
+---
+- name: Sync fstab
+  hosts: slaves_new
+  become: yes
+  remote_user: pcmit
+  gather_facts: False
+  tasks:
+     - import_role: 
+          name: mount_media
+       tags:
+          - slaves_new
+          - slaves_new:mount_media
+          - slaves_new:mount_media:pcmit
+          
+- name: Sync fstab
+  hosts: master_slaves_all
+  become: yes
+  remote_user: pcmit
+  gather_facts: False
+  tasks:
+     - import_role: 
+          name: mount_media
+       tags:
+          - master_slaves_all
+          - master_slaves_all:mount_media
+          - master_slaves_all:mount_media:pcmit
+         

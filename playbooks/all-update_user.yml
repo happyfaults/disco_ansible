@@ -1,0 +1,52 @@
+---
+- name: Sync user master_slaves disco
+  hosts: master_slaves #master_slaves
+  #become: yes
+  remote_user: disco
+  gather_facts: False
+  tasks:
+     - include: roles/update_user/tasks/disco/base.yml
+       tags:
+          - master_slaves
+          - master_slaves:update_user
+          - master_slaves:update_user:disco
+          - master_slaves:update_user:disco:base          
+          
+- name: Sync user slaves_new disco
+  hosts: master #master_slaves
+  #become: yes
+  remote_user: disco
+  gather_facts: False
+  tasks:
+     - include: roles/update_user/tasks/disco/base.yml
+       tags:
+          - master
+          - master:update_user
+          - master:update_user:disco
+          - master:update_user:disco:base
+
+- name: Sync user slaves disco
+  hosts: slaves #master_slaves
+  #become: yes
+  remote_user: disco
+  gather_facts: False
+  tasks:
+     - include: roles/update_user/tasks/disco/base.yml
+       tags:
+          - slaves
+          - slaves:update_user
+          - slaves:update_user:disco
+          - slaves:update_user:disco:base
+
+- name: Sync user slaves_new disco
+  hosts: slaves_new #master_slaves
+  #become: yes
+  remote_user: disco
+  gather_facts: False
+  tasks:
+     - include: roles/update_user/tasks/disco/base.yml
+       tags:
+          - slaves_new
+          - slaves_new:update_user
+          - slaves_new:update_user:disco
+          - slaves_new:update_user:disco:base

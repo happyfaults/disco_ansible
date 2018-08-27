@@ -1,0 +1,8 @@
+# PCMEDIA shares
+nx3500:/NXMedia/Media_Originals /mnt/pcmedia/nx3500/Media_Originals nfs auto,vers=3.0,rsize=1048576,wsize=1048576,retrans=7,soft,async,noatime 0 0
+nx3500:/NXData/Media_OriginalsB /mnt/pcmedia/nx3500/Media_OriginalsB nfs auto,vers=3.0,rsize=1048576,wsize=1048576,retrans=7,soft,async,noatime 0 0
+#nx3500:/MediaAssets/PCM_Media /mnt/pcmedia/nx3500/PCM_Media nfs auto,vers=3.0,rsize=1048576,wsize=1048576,retrans=7,soft,async,noatime 0 0
+# here for CIFS ref
+#//nx3500/Media_Originals /mnt/pcmedia/nx3500/Media_Originals cifs credentials=/etc/samba/credentials/pcmedia,iocharset=utf8,sec=ntlm,gid=1002,file_mode=0775,dir_mode=0775 0 0
+//nl1/PCMServer /mnt/pcmedia/nx3500/PCMServer cifs credentials=/etc/samba/credentials/pcmedia,iocharset=utf8,sec=ntlm,gid=1002,file_mode=0775,dir_mode=0775 0 0
+//nx3500/Employees /mnt/pcmedia/nx3500/Employees cifs noauto,credentials=/etc/samba/credentials/pcmedia,iocharset=utf8,sec=ntlm,gid=1002,file_mode=0775,dir_mode=0775 0 0

@@ -1,0 +1,9 @@
+---
+- name: Copy /etc/samba/credentials
+  copy:
+     src: "{{ playbook_dir }}/{{ hostvars[inventory_hostname].files_dir }}/all/samba/credentials"
+     dest: /etc/samba/
+     #mode: go-rwx
+  tags:
+     - init_host:smb:credentials
+  

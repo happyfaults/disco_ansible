@@ -1,0 +1,65 @@
+---
+- name: Backup /etc/apt/sources.list
+  become: true
+  copy:
+     src: /etc/apt/sources.list
+     dest: /etc/apt/sources.list.bkp
+     remote_src: yes
+     force: no
+     
+- name: Copy local /etc/apt/sources.list to remote
+  become: true
+  copy:
+     src: /etc/apt/sources.list
+     dest: /etc/apt/sources.list
+
+- name: Update/Upgrade apt packages
+  become: true
+  apt:
+     update_cache: yes
+     upgrade: yes
+               
+- name: Dist-Upgrade apt packages
+  become: true
+  apt:
+     upgrade: dist
+     
+- name: Install base required packages
+  become: true
+  apt:
+     name: "{{ packages }}"
+     state: latest
+     update_cache: yes
+  vars:
+     packages:
+     - nfs-common
+     - cifs-utils
+     - portmap
+     - libboost-all-dev
+     - freetds-dev 
+     - libsdl-dev 
+     - libxvidcore-dev 
+     - libx264-dev 
+     - libyaml-dev 
+     - libtag1-dev 
+     - libqt4-dev 
+     - libfftw3-dev
+     - libatlas-base-dev
+     - swig
+     - rsync
+     - sdparm
+  
+- name: Auto clean apt
+  become: true
+  apt:
+     autoclean: yes
+
+- name: Auto remove apt
+  become: true
+  apt:
+     autoremove: yes
+  
+- name: Update-grub
+  become: true
+  command: /usr/sbin/update-grub
+       

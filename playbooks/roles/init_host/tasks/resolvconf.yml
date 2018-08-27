@@ -1,0 +1,6 @@
+---
+- name: Copy /etc/resolvconf/resolv.conf.d/base
+  become: true
+  copy:
+     src: "{{ playbook_dir }}/{{ hostvars[inventory_hostname].files_dir }}/all/resolvconf"
+     dest: /etc/resolvconf/resolv.conf.d/base

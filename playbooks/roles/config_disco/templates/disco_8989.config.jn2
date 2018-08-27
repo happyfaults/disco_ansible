@@ -1,0 +1,17 @@
+{
+	"hosts":[
+	{% for host in groups['master_slaves'] %}
+		["{{ host }}", "{{ hostvars[host].disco_max_workers }}"],
+	{% endfor %}
+	],
+	"blacklist":[
+	{% for host in groups['master'] %}
+		"{{ host }}",
+	{% endfor %}
+	],
+	"gc_blacklist":[
+	{% for host in groups['master'] %}
+		"{{ host }}",
+	{% endfor %}
+	]
+}

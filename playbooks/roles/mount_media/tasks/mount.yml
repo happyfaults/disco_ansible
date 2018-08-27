@@ -1,0 +1,42 @@
+---
+# make pcmedia mount dirs     
+- name: mkdirs /mnt/pcmedia/*/disco
+  file: 
+     dest: /mnt/pcmedia/{{ item }}/disco
+     state: directory
+  with_items: 
+     - "{{  groups.archive_src }}"
+
+- name: mkdirs /mnt/pcmedia/nx3500/*
+  file: 
+     dest: /mnt/pcmedia/nx3500/{{ item }}
+     state: directory
+  with_items: 
+     - "{{  hostvars[inventory_hostname].nx3500 }}"
+
+# mount anything 
+- name: mount /mnt/pcmedia/*/disco
+  command: /bin/mount /mnt/pcmedia/{{ item }}/disco
+  #args:
+  #     warn: no
+  with_items: 
+     - "{{ groups.archive_src }}"
+  tags:
+     - mount_media:archive_src
+     
+- name: mount /mnt/pcmedia/nx3500/*
+  command: mount /mnt/pcmedia/nx3500/{{ item }}
+  #args:
+  #     warn: no
+  with_items: 
+     - "{{ hostvars[inventory_hostname].nx3500 }}"
+  tags:
+     - mount_media:nx3500
+
+# mount auto
+- name: /bin/mount -a
+  command: /bin/mount -a
+  args:
+    warn: no
+  tags:
+    - mount_media:auto

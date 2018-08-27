@@ -1,0 +1,21 @@
+---
+- name: Backup pcmit .bashrc
+  copy:
+     src: /home/pcmit/.bashrc
+     dest: /home/pcmit/.bashrc.bkp
+     remote_src:
+     
+- name: Copy pcmit .bashrc
+  copy:
+     src: /home/pcmit/.bashrc
+     dest: /home/pcmit/.bashrc
+
+- name: Copy pcmit bin
+  copy:
+     src: /home/pcmit/bin
+     dest: /home/pcmit/
+
+- name: Copy pcmit etc
+  copy:
+     src: /home/pcmit/etc
+     dest: /home/pcmit/

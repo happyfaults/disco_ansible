@@ -1,0 +1,8 @@
+---
+- include: disco/media.yml
+  tags:
+     - sync_media
+     - sync_media:disco:media
+     
+
+     

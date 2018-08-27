@@ -1,0 +1,15 @@
+---
+- name: Localhost Config Disco
+  hosts: localhost
+  #become: yes
+  remote_user: disco
+  gather_facts: False
+  tasks:
+    - import_role: 
+        name: config_disco
+      delegate_to: localhost
+      tags:
+        - localhost
+        - localhost:admin_disco
+        - localhost:admin_disco:config
+         

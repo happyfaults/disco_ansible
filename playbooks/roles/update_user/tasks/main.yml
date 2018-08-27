@@ -1,0 +1,6 @@
+---
+- include: disco/base.yml
+  tags:
+     - upgrade_user
+     - upgrade_user:disco
+     - upgrade_user:disco:base

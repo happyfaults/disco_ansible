@@ -1,0 +1,23 @@
+---
+- name: Update disco_8989.config
+  template:
+     src: disco_8989.config.jn2
+     dest: /home/disco/disco_8989.config
+
+# these are required by the pcmsync_host commands
+# see ~/bin/pcmsync_hosts
+- name: Update .disco_hosts_master
+  template:
+     src: disco_hosts_master.jn2
+     dest: /home/disco/.disco_hosts_master
+
+- name: Update .disco_hosts_slaves
+  template:
+     src: disco_hosts_slaves.jn2
+     dest: /home/disco/.disco_hosts_slaves
+
+- name: Update .disco_hosts_master_slaves
+  template:
+     src: disco_hosts_master_slaves.jn2
+     dest: /home/disco/.disco_hosts_master_slaves
+

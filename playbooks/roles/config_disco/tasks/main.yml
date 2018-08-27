@@ -1,0 +1,7 @@
+---
+- include: config.yml
+  tags:
+      - admin_disco
+      - admin_disco:config
+      
+     

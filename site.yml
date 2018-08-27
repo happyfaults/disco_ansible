@@ -1,0 +1,20 @@
+#!/usr/bin/env ansible-playbook --tags { list tags you want }
+
+- import_playbook: playbooks/slaves_new-init_host.yml
+
+- import_playbook: playbooks/slaves_new-sync_user_disco.yml
+- import_playbook: playbooks/slaves_new-sync_user_pcmit.yml
+      
+- import_playbook: playbooks/all-upgrade_host.yml
+ 
+- import_playbook: playbooks/all-update_user.yml
+
+- import_playbook: playbooks/all-reboot.yml
+
+- import_playbook: playbooks/all-mount_media.yml
+
+- import_playbook: playbooks/slaves_new-sync_fstab.yml
+
+- import_playbook: playbooks/master-admin_disco.yml
+
+- import_playbook: playbooks/localhost-admin_disco.yml

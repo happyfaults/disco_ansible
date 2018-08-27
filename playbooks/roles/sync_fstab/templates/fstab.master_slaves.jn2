@@ -1,0 +1,5 @@
+{% for host in groups['archive_src'] %}
+{% if host != inventory_hostname %} 
+//{{host}}/disco /mnt/pcmedia/{{host}}/disco cifs noauto,vers=3.0,credentials=/etc/samba/credentials/disco,iocharset=utf8,sec=ntlm,gid=1002,file_mode=0775,dir_mode=0775 0 0
+{% endif %}
+{% endfor %}

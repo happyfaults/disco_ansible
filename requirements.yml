@@ -1,0 +1,4 @@
+# List of all roles dependencies for playbooks
+# To install role dependencies: ansible-galaxy install -r requirements.yml
+
+# NO DEPENDENCES at the momment

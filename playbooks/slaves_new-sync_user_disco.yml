@@ -1,0 +1,27 @@
+---
+- name: Sync disco home
+  hosts: slaves_new
+  #become: yes
+  remote_user: disco
+  gather_facts: False
+  tasks:
+     - import_role:
+          name: sync_user
+       tags:
+          - slaves_new
+          - slaves_new:sync_user
+          - slaves_new:sync_user:disco
+
+- name: Sync disco media folder
+  hosts: slaves_new
+  #become: yes
+  remote_user: disco
+  gather_facts: False
+  tasks:
+     - import_role:
+          name: sync_media
+       tags:
+          - slaves_new
+          - slaves_new:sync_media
+          - slaves_new:sync_media:disco
+         

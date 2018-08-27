@@ -1,0 +1,64 @@
+---
+# backup original /etc/fstab (note force=no)
+- name: copy /etc/fstab to /etc/fstab.base
+  copy:
+     src: /etc/fstab
+     dest: /etc/fstab.base
+     remote_src: yes
+     force: no
+
+# backup /etc/fstab.base (note force=no)
+- name: copy /etc/fstab.base to /etc/fstab.base.bkp
+  copy:
+     src: /etc/fstab.base
+     dest: /etc/fstab.base.bkp
+     remote_src: yes
+     force: no
+
+# /etc/fstab.local are local fstab defs     
+- name: touch /etc/fstab.local
+  copy:
+     content: ""
+     dest: /etc/fstab.local
+     force: no
+     
+- name: backup /etc/fstab
+  copy:
+     src: /etc/fstab
+     dest: /etc/fstab.previous
+     remote_src: yes
+
+# add mounts for PCMEDIA shares
+- name: add pcmedia shares
+  copy:
+     src: "{{ playbook_dir }}/{{ hostvars[inventory_hostname].files_dir }}/all/fstab.pcmedia"
+     dest: /etc/fstab.pcmedia
+
+# add mounts for master_slaves hosts
+- name: add master_slaves to /etc/fstab.master_slaves
+  template:
+     src: fstab.master_slaves.jn2
+     dest: /etc/fstab.master_slaves
+
+# update /etc/fstab     
+- name: /etc/fstab.base >> /etc/fstab.new
+  copy:
+     src: /etc/fstab.base
+     dest: /etc/fstab.new
+     remote_src: yes
+
+- name: /etc/fstab.local >> /etc/fstab.new
+  shell: /bin/cat /etc/fstab.local >> /etc/fstab.new
+
+- name: /etc/fstab.local >> /etc/fstab.new
+  shell: /bin/cat /etc/fstab.pcmedia >> /etc/fstab.new
+    
+- name: /etc/fstab.master_slaves >> /etc/fstab.new
+  shell: /bin/cat /etc/fstab.master_slaves >> /etc/fstab.new
+    
+- name: /etc/fstab.new >> /etc/fstab
+  copy:
+     src: /etc/fstab.new
+     dest: /etc/fstab
+     remote_src: true
+     

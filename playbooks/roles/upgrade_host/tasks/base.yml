@@ -1,0 +1,30 @@
+---
+- name: Update/Upgrade apt packages
+  become: true
+  apt:
+     update_cache: yes
+     upgrade: yes
+               
+- name: Dist-Upgrade apt packages
+  become: true
+  apt:
+     upgrade: dist
+  
+- name: Auto clean apt
+  become: true
+  apt:
+     autoclean: yes
+
+- name: Auto remove apt
+  become: true
+  apt:
+     autoremove: yes
+
+- name: Update-grub
+  become: true
+  command: /usr/sbin/update-grub
+       
+- name: Reboot system if required
+  command: shutdown -r now 'Rebooting to complete system upgrade'
+  args:
+     removes: /var/run/reboot-required

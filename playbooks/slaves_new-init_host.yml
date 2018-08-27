@@ -1,0 +1,67 @@
+---
+- name: Setup pcmit authkey for password-less logins
+  hosts: slaves_new
+  become: yes
+  remote_user: pcmit 
+  gather_facts: False
+  pre_tasks:
+     - name: Install python for Ansible
+       raw: test - e /usr/bin/python || (apt-get -y update && apt-get install -y python-minimal)
+       changed_when: False
+  tasks:
+     - name: Set pcmit user authorized key taken from file
+       authorized_key:
+          user: pcmit
+          state: present
+          key: "{{ lookup('file', '/home/pcmit/.ssh/id_rsa.pub') }}"
+       tags:
+          - slaves_new
+          - slaves_new:init_host
+          - slaves_new:init_host:pcmit
+          - slaves_new:init_host:pcmit:authkey
+          
+- name: Init new slaves hosts
+  hosts: slaves_new
+  become: yes
+  remote_user: pcmit
+  gather_facts: False
+  tasks: 
+     - import_role:
+          name: init_host
+       tags:
+          - slaves_new
+          - slaves_new:init_host
+          - slaves_new:init_host:pcmit
+ 
+- name: Reboot slaves_new
+  hosts: slaves_new
+  become: yes
+  remote_user: pcmit
+  gather_facts: False
+  tasks:  
+     - name: Reboot system if required
+       command: shutdown -r now 'Rebooting to complete system upgrade'
+       #args:
+       #   removes: /var/run/reboot-required
+       tags:
+          - slaves_new
+          - slaves_new:init_host
+          - slaves_new:init_host:pcmit
+          - slaves_new:init_host:pcmit:reboot
+
+- name: Setup Disco authkey for password-less logins
+  hosts: slaves_new
+  #become: yes
+  remote_user: disco
+  gather_facts: False
+  tasks:
+     - name: Set disco user authorized key taken from file
+       authorized_key:
+          user: disco
+          state: present
+          key: "{{ lookup('file', '/home/disco/.ssh/id_rsa.pub') }}"
+       tags:
+          - slaves_new
+          - slaves_new:init_host
+          - slaves_new:init_host:disco
+          - slaves_new:init_host:disco:authkey

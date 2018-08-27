@@ -1,0 +1,8 @@
+---
+files_dir: files/production
+
+nx3500:
+   - Media_Originals
+   - Media_OriginalsB
+   - PCMServer
+   - Employees

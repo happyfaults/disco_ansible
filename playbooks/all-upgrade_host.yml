@@ -1,0 +1,52 @@
+---
+- name: Upgrade all base
+  hosts: all
+  become: yes
+  remote_user: pcmit
+  gather_facts: False
+     
+  tasks:
+    - include: roles/upgrade_host/tasks/base.yml
+      tags:
+         - all
+         - all:upgrade_host
+         - all:upgrade_host:base
+         
+- name: Upgrade master_slaves base
+  hosts: master_slaves
+  become: yes
+  remote_user: pcmit
+  gather_facts: False
+     
+  tasks:
+    - include: roles/upgrade_host/tasks/base.yml
+      tags:
+         - master_slaves
+         - master_slaves:upgrade_host
+         - master_slaves:upgrade_host:base
+         
+- name: Upgrade master base
+  hosts: master
+  become: yes
+  remote_user: pcmit
+  gather_facts: False
+     
+  tasks:
+    - include: roles/upgrade_host/tasks/base.yml
+      tags:
+         - master
+         - master:upgrade_host
+         - master:upgrade_host:base
+
+- name: Upgrade slaves_all base
+  hosts: slaves_all
+  become: yes
+  remote_user: pcmit
+  gather_facts: False
+     
+  tasks:
+    - include: roles/upgrade_host/tasks/base.yml
+      tags:
+         - slaves_all
+         - slaves_all:upgrade_host
+         - slaves_all:upgrade_host:base

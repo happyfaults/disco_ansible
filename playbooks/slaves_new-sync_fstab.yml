@@ -1,0 +1,14 @@
+---
+- name: Sync fstab
+  hosts: slaves_new
+  become: yes
+  remote_user: pcmit
+  gather_facts: False
+  tasks:
+     - import_role: 
+          name: sync_fstab
+       tags:
+          - slaves_new
+          - slaves_new:sync_fstab
+          - slaves_new:sync_fstab:pcmit
+     

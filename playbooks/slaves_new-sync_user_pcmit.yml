@@ -1,0 +1,13 @@
+---
+- name: Sync pcmit home
+  hosts: slaves_new
+  become: yes
+  remote_user: pcmit
+  gather_facts: False
+  tasks:
+     - import_role:
+          name: sync_user
+       tags:
+          - slaves_new
+          - slaves_new:sync_user
+          - slaves_new:sync_user:pcmit

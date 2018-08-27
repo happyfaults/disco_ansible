@@ -1,0 +1,46 @@
+---
+- name: Mkdir media
+  file:
+     path: /home/disco/media
+     state: directory
+     
+- name: Mkdir media/archive
+  file:
+     path: /home/disco/media/archive
+     state: directory
+     
+- name: Mkdir media/pcmedia
+  file:
+     path: /home/disco/media/pcmedia
+     state: directory
+
+# archive hosts     
+- name: Mkdir media/pcmedia/disco_nodes
+  file:
+     path: /home/disco/media/pcmedia/disco_nodes
+     state: directory
+
+- name: Mkdir media/pcmedia/nx3500
+  file:
+     path: /home/disco/media/pcmedia/nx3500
+     state: directory
+     
+- name: ln -s /home/disco/media/nx3500 *
+  file:
+     src: "/mnt/pcmedia/nx3500/{{ item }}"
+     path: "/home/disco/media/pcmedia/nx3500/{{ item }}"
+     remote_src: yes
+     state: link
+     force: no
+  with_items:
+     - "{{  hostvars[inventory_hostname].nx3500 }}"
+        
+- name: ln -s /home/disco/media/disco_nodes *
+  file:
+     src: "/mnt/pcmedia/{{ item }}"
+     path: "/home/disco/media/pcmedia/disco_nodes/{{ item }}"
+     remote_src: yes
+     state: link
+     force: no
+  with_items:
+     - "{{  groups['archive_src'] }}"

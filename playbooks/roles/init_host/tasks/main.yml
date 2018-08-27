@@ -1,0 +1,24 @@
+---
+- include: base.yml
+  tags:
+      - init_host
+      - init:base
+      
+- include: users_groups.yml
+  tags:
+     - init_host
+     - init_host:users_groups
+          
+- include: resolvconf.yml
+  tags:
+     - init_host
+     - init_host:resolvconf
+     
+- include: smb.yml
+  tags:
+     - init_host
+     - init_host:smb
+     
+     
+
+     

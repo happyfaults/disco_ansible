@@ -1,0 +1,50 @@
+---
+- name: reboot master_slaves
+  hosts: all
+  become: yes
+  remote_user: pcmit
+  gather_facts: False
+  tasks:  
+     - name: Force Reboot system 
+       command: shutdown -r now 'Rebooting request'
+       tags:
+          - reboot
+          - all:reboot
+     
+- name: reboot master_slaves
+  hosts: master
+  become: yes
+  remote_user: pcmit
+  gather_facts: False
+  tasks:  
+      - name: Force Reboot system 
+        command: shutdown -r now 'Rebooting request'
+        tags:
+           - reboot
+           - master:reboot
+          
+- name: reboot master_slaves
+  hosts: slaves
+  become: yes
+  remote_user: pcmit
+  gather_facts: False
+  tasks:  
+     - name: Force Reboot system 
+       command: shutdown -r now 'Rebooting request'
+       tags:
+          - reboot
+          - slaves:reboot
+          
+          
+- name: reboot slaves_new
+  hosts: slaves_new
+  become: yes
+  remote_user: pcmit
+  gather_facts: False
+  tasks:  
+     - name: Force Reboot system 
+       command: shutdown -r now 'Rebooting request'
+       tags:
+          - reboot
+          - slaves_new:reboot
+          

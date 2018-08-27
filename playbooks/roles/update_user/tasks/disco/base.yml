@@ -1,0 +1,12 @@
+---
+- name: Update anaconda conda
+  command: conda update -y conda
+  tags:
+     - conda
+     - conda:conda
+               
+- name: Update anaconda conda python
+  command: conda update -y python
+  tags:
+     - conda
+     - conda:python

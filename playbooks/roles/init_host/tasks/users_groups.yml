@@ -1,0 +1,16 @@
+---
+- name: Create Group pcmedia
+  become: yes
+  group:
+     name: pcmedia
+     gid: 2001
+     state: present
+
+- name: Create User disco
+  become: yes
+  user:
+     name: disco
+     uid: 1002
+     state: present
+     groups: pcmedia
+     password: $6$57FsonomD6/9qo$XZQFYNwmgT.YY2q0X196kWvvzbGnaAZNvMUh.BPVEx33KF.G121A.Xov3kCXGKXIjeXuUOUqm9AZa.4tkb8EH1

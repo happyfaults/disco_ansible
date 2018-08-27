@@ -1,0 +1,25 @@
+---
+- name: Master Admin Disco
+  hosts: master
+  #become: yes
+  remote_user: disco
+  gather_facts: False
+  tasks:
+    - import_role: 
+        name: config_disco
+      tags:
+        - master
+        - master:admin_disco
+        - master:admin_disco:config
+
+    - name: cp disco_8989.config opt/var/disco
+      copy:
+        src: /home/disco/disco_8989.config
+        dest: /home/disco/opt/var/disco/
+        remote_src: yes
+      tags:
+        - master
+        - master:admin_disco
+        - master:admin_disco:config
+
+         
